@@ -13,4 +13,4 @@ jobs:
       - run:
         name: docker-image
         command: |
-        docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .
+          docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .

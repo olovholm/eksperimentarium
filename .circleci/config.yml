@@ -11,9 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: docker-image
-        command: |
-          docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .
+          name: docker-image
+          command: |
+            docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .
 workflows:
   version: 2
   build_and_docker-image:

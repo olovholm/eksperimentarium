@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
-  docker-iamge:
+  docker-image:
     machine: true
     steps:
       - checkout

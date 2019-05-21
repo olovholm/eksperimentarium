@@ -6,4 +6,4 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
-      - run: docker build-arg JAR_FILE=server/target/application.jar -t olovholm/test:latest .
+      - run: docker --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .

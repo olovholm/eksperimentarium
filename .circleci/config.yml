@@ -6,4 +6,11 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
-      - run: docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .
+  docker-iamge:
+    machine: true
+    steps:
+      - checkout
+      - run:
+        name: docker-image
+        command: |
+        docker build --build-arg JAR_FILE=server/target/application.jar --tag olovholm/test:latest .

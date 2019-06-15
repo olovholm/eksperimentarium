@@ -11,7 +11,7 @@ jobs:
       - store_artifacts:
           path: server/target/application.jar
           destination: application.jar
-       - persist_to_workspace:
+      - persist_to_workspace:
           root: workspace
   docker-image:
     machine: true

@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: workspace
       - run: pwd
       - run: ls -la
       - run:
@@ -35,4 +35,6 @@ workflows:
   build_and_docker-image:
     jobs:
       - build
-      - docker-image
+      - docker-image:
+          - requires:
+              - build

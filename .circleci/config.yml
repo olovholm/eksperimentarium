@@ -10,11 +10,14 @@ jobs:
       - run: mvn clean install
       - run: pwd
       - run: ls -la
+      - run: cp server/target/application.jar workspace/application.jar
       - store_artifacts:
           path: server/target/application.jar
           destination: application.jar
       - persist_to_workspace:
           root: workspace
+          paths:
+            - application.jar
   docker-image:
     machine: true
     steps:

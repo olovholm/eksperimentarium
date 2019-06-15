@@ -24,6 +24,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: /tmp/workspace
+      - run: pwd
+      - run: ls -la
       - run:
           name: docker-image
           command: |

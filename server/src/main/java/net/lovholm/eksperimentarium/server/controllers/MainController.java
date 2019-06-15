@@ -8,16 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/")
+public class MainController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    public ResponseEntity hello() {
+    public ResponseEntity index() {
+        return ResponseEntity.ok().body("Hello from basic app");
 
-        return ResponseEntity.ok().body("Hello");
-
-
-    }
+        }
 
 
 }

@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run: mvn clean install
       - store_artifacts:
-          path: /server/target/application.jar
+          path: server/target/application.jar
           destination: application.jar
   docker-image:
     machine: true

@@ -8,6 +8,8 @@ jobs:
       - checkout
       - run: mkdir -p workspace
       - run: mvn clean install
+      - run: pwd
+      - run: ls -la
       - store_artifacts:
           path: server/target/application.jar
           destination: application.jar

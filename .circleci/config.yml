@@ -36,5 +36,5 @@ workflows:
     jobs:
       - build
       - docker-image:
-          - requires:
-              - build
+          requires:
+            - build

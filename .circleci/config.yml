@@ -29,7 +29,7 @@ jobs:
       - run:
           name: docker-image
           command: |
-            docker build --build-arg JAR_FILE=/tmp/workspace/application.jar --tag lovholmacr/test:latest .
+            docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr/test:latest .
 workflows:
   version: 2
   build_and_docker-image:

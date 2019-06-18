@@ -1,6 +1,5 @@
 version: 2.1
 
-
 jobs:
   build:
     docker:
@@ -33,9 +32,8 @@ jobs:
             docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr/test:latest .
 orbs:
   azure-acr: circleci/azure-acr@0
-
 workflows:
-  version: 2
+  version: 2.1
   build_and_docker-image:
     jobs:
       - build

@@ -22,7 +22,6 @@ jobs:
           root: workspace
           paths:
             - application.jar
-
   docker-image:
     machine: true
     steps:
@@ -35,7 +34,6 @@ jobs:
           name: docker-image
           command: |
             docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr/test:latest .
-
   az-verify-install:
     executor: azure-cli/default
     steps:

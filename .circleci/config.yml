@@ -1,7 +1,5 @@
 version: 2.1
 
-orbs:
-  azure-cli: circleci/azure-cli@1.0.0
 
 jobs:
   build:
@@ -34,13 +32,9 @@ jobs:
           name: docker-image
           command: |
             docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr/test:latest .
-  az-verify-install:
-    executor: azure-cli/default
-    steps:
-      - azure-cli/install
-      - run:
-          name: Verify Azure CLI is installed
-          command: az -v
+orbs:
+  azure-acr: circleci/azure-acr@0
+
 workflows:
   version: 2
   build_and_docker-image:
@@ -49,4 +43,9 @@ workflows:
       - docker-image:
           requires:
             - build
-      - az-verify-install
+      - azure-acr/acr-login:
+          requires:
+            - build
+      - azure-acr/build-and-push-image:
+          requires:
+            - docker-image

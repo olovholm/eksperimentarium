@@ -29,9 +29,12 @@ jobs:
       - run:
           name: docker-image
           command: |
-            docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr/test:latest .
-orbs:
-  azure-acr: circleci/azure-acr@0.1.1
+            docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr.azurecr.io/test:latest .
+      - run:
+          command: docker login --username $AZURE_USERNAME --password $AZURE_PASSWORD lovholmacr.azurecr.io
+      - run:
+          command: docker push lovholmacr.azurecr.io/test:latest
+
 workflows:
   version: 2.1
   build_and_docker-image:
@@ -40,9 +43,3 @@ workflows:
       - docker-image:
           requires:
             - build
-      - azure-acr/build_and_push_image:
-          requires:
-            - docker-image
-          login-server-name: lovholmacr.azure.io
-          registry-name: lovholmacr
-          repo: lovholmacr.azurecr.io/eksperimentarium

@@ -43,3 +43,6 @@ workflows:
       - azure-acr/build-and-push-image:
           requires:
             - docker-image
+          login-server-name: lovholmacr.azure.io
+          registry-name: lovholmacr
+          repo: lovholmacr.azurecr.io/eksperimentarium

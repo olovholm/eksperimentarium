@@ -40,9 +40,6 @@ workflows:
       - docker-image:
           requires:
             - build
-      - azure-acr/acr-login:
-          requires:
-            - build
       - azure-acr/build-and-push-image:
           requires:
             - docker-image

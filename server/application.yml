@@ -1,0 +1,12 @@
+environments:
+  local:
+    url: https://localhost:9099
+    name: Local Development
+  test:
+    url: https://test.environment.test
+    name: Test development
+  prod:
+    url: https://production.com
+    name: Eksperimentarium
+server:
+  port: 9099

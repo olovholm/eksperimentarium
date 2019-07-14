@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace
-      - run: mvn clean install
+      - run: mvn -Pprod clean install
       - run: pwd
       - run: ls -la
       - run: cp server/target/application.jar workspace/application.jar
@@ -20,6 +20,9 @@ jobs:
             - application.jar
   docker-image:
     machine: true
+    branches:
+      only:
+        - master
     steps:
       - checkout
       - attach_workspace:

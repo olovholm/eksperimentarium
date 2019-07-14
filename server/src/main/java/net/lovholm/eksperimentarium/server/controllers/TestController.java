@@ -2,6 +2,8 @@ package net.lovholm.eksperimentarium.server.controllers;
 
 
 import net.lovholm.eksperimentarium.domene.Person;
+import net.lovholm.eksperimentarium.server.util.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+    @Autowired
+    private Environment environment;
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
     public ResponseEntity hello() {
@@ -30,7 +35,8 @@ public class TestController {
         personer.add(new Person("test", "testersen","03923823"));
         personer.add(new Person("sadg", "testersen","235"));
         personer.add(new Person("tedfskldsst", "testersen","039252352353823"));
-        personer.add(new Person("tagdest", "testersen","235235"));
+        personer.add(new Person(environment.getApplication(), "testersen","235235"));
+
 
         return personer;
 

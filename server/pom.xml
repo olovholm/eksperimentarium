@@ -23,10 +23,6 @@
         </dependency>
         <dependency>
             <groupId>net.lovholm</groupId>
-            <artifactId>frontend</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.lovholm</groupId>
             <artifactId>domene</artifactId>
         </dependency>
     </dependencies>

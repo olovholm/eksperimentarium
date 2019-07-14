@@ -22,8 +22,12 @@
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.lovholm</groupId>
+            <groupId>net.lovholm.eksperimentarium</groupId>
             <artifactId>domene</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.lovholm.eksperimentarium</groupId>
+            <artifactId>integrasjon</artifactId>
         </dependency>
     </dependencies>
 

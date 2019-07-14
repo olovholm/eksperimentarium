@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace
-      - run: mvn -Pprod clean install
+      - run: mvn -Pprod -Drevision=0.5 -Dsha1=$CIRCLE_SHA1 -Dchangelist= clean install
       - run: pwd
       - run: ls -la
       - run: cp server/target/application.jar workspace/application.jar
@@ -29,9 +29,11 @@ jobs:
       - run:
           name: docker-image
           command: |
-            docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr.azurecr.io/eksperimentarium:latest .
+            docker build --build-arg JAR_FILE=workspace/application.jar --tag lovholmacr.azurecr.io/eksperimentarium:latest --tag lovholmacr.azurecr.io/eksperimentarium:0.5-$CIRCLE_SHA1 .
       - run:
           command: docker login --username $AZURE_USERNAME --password $AZURE_PASSWORD lovholmacr.azurecr.io
+      - run:
+          command: docker push lovholmacr.azurecr.io/eksperimentarium:0.5-$CIRCLE_SHA1
       - run:
           command: docker push lovholmacr.azurecr.io/eksperimentarium:latest
 

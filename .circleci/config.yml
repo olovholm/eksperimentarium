@@ -20,9 +20,6 @@ jobs:
             - application.jar
   docker-image:
     machine: true
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - attach_workspace:
@@ -46,3 +43,6 @@ workflows:
       - docker-image:
           requires:
             - build
+          filters:
+            branches:
+              only: master

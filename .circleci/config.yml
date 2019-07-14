@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p workspace
-      - run: mvn -Pprod clean install
+      - run: mvn -Pprod -Dsha1=$CIRCLE_SHA1 -Dchangelist= clean install
       - run: pwd
       - run: ls -la
       - run: cp server/target/application.jar workspace/application.jar

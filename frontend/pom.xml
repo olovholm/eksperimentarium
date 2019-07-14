@@ -5,7 +5,7 @@
     <parent>
         <artifactId>eksperimentarium</artifactId>
         <groupId>net.lovholm.eksperimentarium</groupId>
-        <version>${revision}${sha1}${changelist}</version>
+        <version>${revision}-${sha1}${changelist}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>frontend</artifactId>

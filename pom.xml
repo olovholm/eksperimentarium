@@ -5,7 +5,7 @@
 
     <groupId>net.lovholm.eksperimentarium</groupId>
     <artifactId>eksperimentarium</artifactId>
-    <version>${revision}${sha1}${changelist}</version>
+    <version>${revision}-${sha1}${changelist}</version>
     <packaging>pom</packaging>
 
 

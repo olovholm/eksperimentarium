@@ -15,12 +15,3 @@
         </b-navbar>
     </div>
 </template>
-
-<style scoped>
-    .vtpnavbar {
-        margin-bottom: 40px;
-    }
-</style>
-
-<script>
-</script>

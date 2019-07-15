@@ -1,27 +1,45 @@
 <template>
-  <div id="app">
-    <Navbar></Navbar>
-  </div>
+    <div class="wordart rainbow">
+        <h1 class="text">Hello Hõla World</h1>
+        <h3>From Vue.js</h3>
+        <div :class="{ checkbox: true, checked: checked }"></div>
+    </div>
 </template>
 
-<style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
-  #nav {
-    padding: 30px;
-  }
+<script></script>
 
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
+<style>
+    .wordart {
+        padding: 15px;
+        font-family: Arial, sans-serif;
+        font-size: 4em;
+        font-weight: bold;
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+    }
+
+    .wordart.rainbow {
+        transform: scale(1, 1.5);
+        -webkit-transform: scale(1, 1.5);
+        -moz-transform: scale(1, 1.5);
+        -o-transform: scale(1, 1.5);
+        -ms-transform: scale(1, 1.5);
+    }
+
+    .wordart.rainbow .text {
+        background: red;
+        background: -webkit-linear-gradient(left, #b306a9, #ef2667, #f42e2c, #ffa509, #fdfc00, #55ac2f, #0b13fd, #a804af);
+        background: -o-linear-gradient(left, #b306a9, #ef2667, #f42e2c, #ffa509, #fdfc00, #55ac2f, #0b13fd, #a804af);
+        background: -moz-linear-gradient(left, #b306a9, #ef2667, #f42e2c, #ffa509, #fdfc00, #55ac2f, #0b13fd, #a804af);
+        background: linear-gradient(to right, #b306a9, #ef2667, #f42e2c, #ffa509, #fdfc00, #55ac2f, #0b13fd, #a804af);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
 </style>
 
-<script>
-</script>

@@ -1,12 +1,22 @@
 <template>
-    <div class="wordart rainbow">
-        <h1 class="text">Hello Hõla World</h1>
-        <h3>From Vue.js</h3>
-        <div :class="{ checkbox: true, checked: checked }"></div>
+    <div>
+        <Navbar/>
+        <Carousel/>
     </div>
 </template>
 
-<script></script>
+<script>
+
+    import Navbar from '@/components/Navbar.vue'
+    import Carousel from '@/components/Carousel.vue'
+
+    export default {
+        components: {
+            Navbar,
+            Carousel
+        }
+    }
+</script>
 
 <style>
     .wordart {

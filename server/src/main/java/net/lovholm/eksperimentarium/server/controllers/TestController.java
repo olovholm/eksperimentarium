@@ -1,11 +1,12 @@
 package net.lovholm.eksperimentarium.server.controllers;
 
 
-import net.lovholm.eksperimentarium.domene.Person;
+import net.lovholm.eksperimentarium.domene.entities.Person;
+import net.lovholm.eksperimentarium.domene.services.PersonService;
 import net.lovholm.eksperimentarium.server.util.Environment;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,9 @@ public class TestController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private PersonService personService;
+
     @RequestMapping(method = RequestMethod.GET, path = "/")
     public ResponseEntity hello() {
 
@@ -28,17 +32,17 @@ public class TestController {
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, path="/lagre")
+    public ResponseEntity lagrepersoner() {
+        personService.lagrePerson(new Person("Ola","Løvholm","11992244"));
+        personService.lagrePerson(new Person("Alexandra","Macovei","11002244"));
+        return ResponseEntity.ok().body("Lagre");
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/alle")
     public List<Person> getPersoner() {
 
-        List<Person> personer = new ArrayList<>();
-        personer.add(new Person("test", "testersen","03923823"));
-        personer.add(new Person("sadg", "testersen","235"));
-        personer.add(new Person("tedfskldsst", "testersen","039252352353823"));
-        personer.add(new Person(environment.getApplication(), "testersen","235235"));
-
-
-        return personer;
+        return personService.hentAllePersoner();
 
     }
 

@@ -1,4 +1,5 @@
 package net.lovholm.eksperimentarium.domene;
+import net.lovholm.eksperimentarium.domene.entities.Person;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

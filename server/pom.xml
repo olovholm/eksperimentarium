@@ -21,6 +21,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
+
+
+        <!-- Prosjektavhengigheter -->
         <dependency>
             <groupId>net.lovholm.eksperimentarium</groupId>
             <artifactId>domene</artifactId>
@@ -30,6 +33,7 @@
             <artifactId>integrasjon</artifactId>
         </dependency>
 
+        <!-- Testavhengigheter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>

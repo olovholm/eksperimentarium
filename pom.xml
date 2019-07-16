@@ -53,10 +53,18 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.5.6.RELEASE</version>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.199</version>
+            </dependency>
+
 
             <!-- Test dependencies -->
             <dependency>
@@ -80,7 +88,6 @@
             </dependency>
 
 
-
             <!-- Prosjekt-dependencies -->
             <dependency>
                 <groupId>net.lovholm.eksperimentarium</groupId>
@@ -95,6 +102,14 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.25.0-GA</version>
+        </dependency>
+    </dependencies>
 
 
     <build>

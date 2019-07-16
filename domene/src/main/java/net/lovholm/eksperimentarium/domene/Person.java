@@ -1,9 +1,13 @@
 package net.lovholm.eksperimentarium.domene;
 
+import javax.validation.constraints.Pattern;
+
 public class Person {
 
     private String fornavn;
     private String etternavn;
+
+    @Pattern(regexp = "[0-9]{8}")
     private String telefonummer;
 
     public Person(String fornavn, String etternavn, String telefonummer) {
@@ -22,5 +26,9 @@ public class Person {
 
     public String getTelefonummer() {
         return telefonummer;
+    }
+
+    public String getSammensattnavn() {
+        return "" + fornavn + " " + etternavn;
     }
 }

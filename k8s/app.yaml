@@ -1,23 +1,24 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: eksperimentarium
+  name: eksperimentarium-service
   labels:
-    run: eksperimentarium
+    app: eksperimentarium
 spec:
   type: LoadBalancer
   ports:
     - port: 80
+      targetPort: 80
       name: http
       protocol: TCP
   selector:
-    run: eksperimentarium
+    app: eksperimentarium
 
 ---
 apiVersion:	apps/v1
 kind: Deployment
 metadata:
-    name: eksperimentarium
+    name: eksperimentarium-deployment
 spec:
   replicas: 3
   minReadySeconds: 20
@@ -36,9 +37,10 @@ spec:
     spec:
       containers:
         - name: eksperimentarium
-          image: lovholmacr.azurecr.io/eksperimentarium:latest
+          image: lovholmacr.azurecr.io/eksperimentarium:0.5-a735f715ec4082264a04d4b9d2e91ecc39970376
           ports:
             - containerPort: 80
+              name: server
           env:
             - name: "spring_profiles_active"
               value: "prod"

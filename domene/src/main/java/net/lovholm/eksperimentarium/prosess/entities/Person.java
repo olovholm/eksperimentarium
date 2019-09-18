@@ -1,4 +1,4 @@
-package net.lovholm.eksperimentarium.domene.entities;
+package net.lovholm.eksperimentarium.prosess.entities;
 
 import net.lovholm.eksperimentarium.BaseEntitet;
 
@@ -23,12 +23,21 @@ public class Person extends BaseEntitet implements Serializable {
     @Pattern(regexp = "[0-9]{8}")
     private String telefonummer;
 
+    @ManyToOne
+    @JoinColumn(name = "adresse_id")
+    private Adresse adresse;
+
+
     public Person() {}
 
     public Person(String fornavn, String etternavn, String telefonummer) {
         this.fornavn = fornavn;
         this.etternavn = etternavn;
         this.telefonummer = telefonummer;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
     public String getFornavn() {

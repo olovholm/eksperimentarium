@@ -110,6 +110,16 @@
                 <artifactId>integrasjon</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.lovholm.eksperimentarium</groupId>
+                <artifactId>felles</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.lovholm.eksperimentarium</groupId>
+                <artifactId>prosess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

@@ -23,12 +23,12 @@ public class Person extends BaseEntitet implements Serializable {
     @Pattern(regexp = "[0-9]{8}")
     private String telefonummer;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "adresse_id")
     private Adresse adresse;
 
 
-    public Person() {}
+    protected Person() {}
 
     public Person(String fornavn, String etternavn, String telefonummer) {
         this.fornavn = fornavn;
@@ -55,4 +55,38 @@ public class Person extends BaseEntitet implements Serializable {
     public String getSammensattnavn() {
         return "" + fornavn + " " + etternavn;
     }
+
+    public static final PersonBygger builder() {
+        return new PersonBygger();
+    }
+
+    public static class PersonBygger {
+        private Person kladd;
+
+        public PersonBygger() {
+            kladd = new Person();
+        }
+
+        public PersonBygger medFornavn(String fornavn){
+            this.kladd.fornavn = fornavn;
+            return this;
+        }
+
+        public PersonBygger medEtternavn(String etternavn){
+            this.kladd.etternavn = etternavn;
+            return this;
+        }
+
+        public PersonBygger medTelefonnummer(String telefonnummer){
+            this.kladd.telefonummer = telefonnummer;
+            return this;
+        }
+
+        public Person bygg() {
+            return this.kladd;
+        }
+
+
+    }
+
 }

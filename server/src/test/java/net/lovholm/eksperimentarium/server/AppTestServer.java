@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "net.lovholm")
 @EnableJpaRepositories(basePackages ={"net.lovholm"})
 @EntityScan(basePackages = {"net.lovholm"})
-public class AppTestServer {
+public class AppTestServer extends AbstractAppServer {
     public static void main(String[] args) {
         SpringApplication.run(AppTestServer.class, args);
     }

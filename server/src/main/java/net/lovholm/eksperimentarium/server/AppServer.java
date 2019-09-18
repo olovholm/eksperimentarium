@@ -18,11 +18,9 @@ import java.util.Map;
 @SpringBootApplication(scanBasePackages = "net.lovholm")
 @EnableJpaRepositories(basePackages ={"net.lovholm"})
 @EntityScan(basePackages = {"net.lovholm"})
-public class AppServer {
+public class AppServer extends AbstractAppServer {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        taskManager.start();
         SpringApplication.run(AppServer.class, args);
     }
 

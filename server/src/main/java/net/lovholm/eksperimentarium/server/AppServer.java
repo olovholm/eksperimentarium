@@ -21,8 +21,8 @@ import java.util.Map;
 public class AppServer {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        taskManager.start();
+        //TaskManager taskManager = new TaskManager();
+        //taskManager.start();
         SpringApplication.run(AppServer.class, args);
     }
 

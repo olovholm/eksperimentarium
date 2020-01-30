@@ -10,9 +10,6 @@ public class TaskManager implements ServiceHandler {
     private ExceutorService runtaskservice;
     private ScheduledExecutorService pollingService;
 
-
-
-
     public TaskManager() {
 
     }

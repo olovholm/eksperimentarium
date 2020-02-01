@@ -9,9 +9,7 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v1
       - uses: actions/cache@v1
@@ -27,8 +25,39 @@ jobs:
         shell: bash
         run: |
           echo "Building artifacts $(echo $GITHUB_SHA | cut -c1-7)"
-          mvn install -e  -Dmaven.wagon.http.pool=false --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7) -Dfile.encoding=UTF-8 -DinstallAtEnd=true
+          mvn install -e -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7) -Dfile.encoding=UTF-8 -DinstallAtEnd=true
           echo "Installed artifacts"
           echo ::set-env name=IMAGE::$IMAGE_BASE:$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
+      - name: Bygg og push docker-image
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          LOGIN_SERVER: ${{ secrets.CONTAINER_REGRISTRY }}
+          DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        run: |
+          docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} ${LOGIN_SERVER}
+          docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
+          docker push ${IMAGE}
+          docker push ${IMAGE_BASE}:latest
 
-# Legge til å bygge dockerimage og pushe til kubernetes
+
+      - uses: azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ secrets.CLUSTER_NAME }}
+          resource-group: ${{ secrets.CLUSTER_RESOURCE_GROUP }}
+      - uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: ${{ secrets.CONTAINER_REGRISTRY }}
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: ${{ secrets.CONTAINER_REGRISTRY }}-registry-connection
+      - uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            manifests/deployment.yml
+            manifests/service.yml
+          images: |
+            ${{env.IMAGE}}
+          imagepullsecrets: |
+            ${{ secrets.CONTAINER_REGRISTRY }}-registry-connection

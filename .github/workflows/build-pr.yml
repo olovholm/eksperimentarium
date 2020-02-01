@@ -23,10 +23,10 @@ jobs:
         run: |
           echo "Building $(echo $GITHUB_SHA | cut -c1-7)"
           mvn package --batch-mode --file pom.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
-      - name: Repository Dispatch Verdikjedetest
-          uses: peter-evans/repository-dispatch@v1
-          with:
-            token: ${{ secrets.REPO_ACCESS_TOKEN }}
-            repository: navikt/k9-verdikjede
-            event-type: saksbehandling-verdikjede
-            client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "text": "pomfrittes"}'
+      - name: Repository Dispatch Spring boot
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: olovholm/bootyspring
+          event-type: bygg
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}"}'

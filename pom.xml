@@ -29,6 +29,7 @@
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
     </properties>
 
+
     <profiles>
         <profile>
             <id>dev</id>
@@ -63,6 +64,12 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.199</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.9.2</version>
             </dependency>
 
             <!-- Java 11 Jaxb -->
@@ -176,5 +183,13 @@
         </plugins>
     </build>
 
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github navikt Maven Packages</name>
+            <url>https://maven.pkg.github.com/olovholm/eksperimentarium</url>
+        </repository>
+    </distributionManagement>
 
 </project>

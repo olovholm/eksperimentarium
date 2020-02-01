@@ -25,9 +25,13 @@ jobs:
         shell: bash
         run: |
           echo "Building artifacts $(echo $GITHUB_SHA | cut -c1-7)"
-          mvn install -e -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7) -Dfile.encoding=UTF-8 -DinstallAtEnd=true
+          mvn deploy -e -Pprod --settings ./.m2/settings.xml -Dchangelist= -Dsha1=-$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7) -Dfile.encoding=UTF-8 -DinstallAtEnd=true
           echo "Installed artifacts"
+          echo ::set-env version=$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
           echo ::set-env name=IMAGE::$IMAGE_BASE:$(git log -1 --pretty='%ad' --date=format:'%Y%m%d%H%M%S')-$(echo $GITHUB_SHA | cut -c1-7)
+        env:
+          GITHUB_USERNAME: x-access-token
+          GITHUB_PASSWORD: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Bygg og push docker-image
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
@@ -35,10 +39,14 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
         run: |
+          echo "Bygger og pusher til Azure"
           docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} ${LOGIN_SERVER}
           docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
           docker push ${IMAGE}
           docker push ${IMAGE_BASE}:latest
+          echo "Pusher til GitHub"
+          docker login -u olovholm -p ${{ secrets.GITHUB_ACCESS_TOKEN }} docker.pkg.github.com
+          docker tag ${IMAGE_BASE}:latest docker.pkg.github.com/olovholm/eksperimentarium/eksperimentarium:latest
 
 
       - uses: azure/aks-set-context@v1
@@ -61,3 +69,16 @@ jobs:
             ${{env.IMAGE}}
           imagepullsecrets: |
             ${{ secrets.CONTAINER_REGRISTRY }}-registry-connection
+      - name: Notification til slack
+        shell: bash
+        run: |
+          curl -X POST --data-urlencode \
+          'payload={"channel": "#playing-with-tech",
+          "username": "verdikjedetesteren",
+          "text": "Ny versjon av eksperimentarium er produksjonssatt.",
+          "blocks": [ { "type": "section", "text": {
+          "type": "mrkdwn",
+          "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
+          } } ],
+          "icon_emoji": ":snowman:"}' ${{ secrets.SLACK_WEBHOOK }}
+

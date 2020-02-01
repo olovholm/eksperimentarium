@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eksperimentarium
+  labels:
+    app: eksperimentarium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eksperimentarium
+  template:
+    metadata:
+      labels:
+        app: eksperimentarium
+    spec:
+      containers:
+        - name: eksperimentarium
+          image: lovholmacr.azurecr.io/eksperimentarium
+          ports:
+            - containerPort: 80

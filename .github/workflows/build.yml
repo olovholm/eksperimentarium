@@ -61,3 +61,12 @@ jobs:
             ${{env.IMAGE}}
           imagepullsecrets: |
             ${{ secrets.CONTAINER_REGRISTRY }}-registry-connection
+      - name: Notification til slack
+        shell: bash
+        run: |
+          curl -X POST --data-urlencode \
+          "payload={\"channel\": \"#playing-with-tech\", \
+          \"username\": \"pullrequestmannen\", \
+          \"text\": \"Ny versjon av eksperimentarium er produksjonssatt.\", \
+          \"icon_emoji\": \":snowman:\"}" ${{ secrets.SLACK_WEBHOOK }}
+

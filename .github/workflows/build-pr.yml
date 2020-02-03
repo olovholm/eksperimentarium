@@ -37,6 +37,6 @@ jobs:
           \"username\": \"verdikjedetesteren\", \
           \"blocks\": [ { \"type\": \"section\", \"text\": {  \
           \"type\": \"mrkdwn\",
-          \"text\": \"<https://https://navikt.github.io/k9-verdikjede/|Testrapport> \n :scream: De automatiske testene feilet\"
+          \"text\": \"<https://navikt.github.io/k9-verdikjede/|Testrapport> \n :scream: De automatiske testene feilet\"
           } } ], \
           \"icon_emoji\": \":snowman:\"}" ${{ secrets.SLACK_WEBHOOK }}

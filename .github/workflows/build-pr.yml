@@ -35,9 +35,8 @@ jobs:
           curl -X POST --data-urlencode \
           "payload={\"channel\": \"#playing-with-tech\", \
           \"username\": \"verdikjedetesteren\", \
-          \"text\": \"Ny versjon av eksperimentarium er produksjonssatt.\", \
           \"blocks\": [ { \"type\": \"section\", \"text\": {  \
           \"type\": \"mrkdwn\",
-          \"text\": \"<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s.\"
+          \"text\": \"<https://https://navikt.github.io/k9-verdikjede/|Testrapport> \n :scream: De automatiske testene feilet\"
           } } ], \
           \"icon_emoji\": \":snowman:\"}" ${{ secrets.SLACK_WEBHOOK }}

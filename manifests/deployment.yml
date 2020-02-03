@@ -6,6 +6,12 @@ metadata:
     app: eksperimentarium
 spec:
   replicas: 1
+  minReadySeconds: 20
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       app: eksperimentarium
@@ -19,3 +25,6 @@ spec:
           image: lovholmacr.azurecr.io/eksperimentarium
           ports:
             - containerPort: 80
+          env:
+            - name: "spring_profiles_active"
+              value: "prod"

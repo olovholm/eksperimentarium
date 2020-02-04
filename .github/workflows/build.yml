@@ -66,6 +66,7 @@ jobs:
           secret-name: ${{ secrets.CONTAINER_REGRISTRY }}-registry-connection
       - uses: azure/k8s-deploy@v1
         with:
+          namespace: 'prod'
           manifests: |
             manifests/deployment.yml
             manifests/service.yml

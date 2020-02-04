@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eksperimentarium
+  namespace: prod
   labels:
     app: eksperimentarium
+    team: lovholm
 spec:
   replicas: 1
   minReadySeconds: 20

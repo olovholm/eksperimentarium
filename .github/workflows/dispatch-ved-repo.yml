@@ -1,8 +1,7 @@
 name: Kall videre ved push av image
-
 on:
   registry_package:
-    types: [published, updated]
+    action: [published, updated]
 
 jobs:
   verdikjedetriggere:

@@ -51,6 +51,7 @@ jobs:
             echo "Pusher til GitHub"
             docker login -u olovholm -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
             docker tag ${IMAGE_BASE}:latest docker.pkg.github.com/olovholm/eksperimentarium/eksperimentarium:latest
+            docker push docker.pkg.github.com/olovholm/eksperimentarium/eksperimentarium:latest
 
       - uses: azure/aks-set-context@v1
         with:

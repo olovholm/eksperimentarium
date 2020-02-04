@@ -47,7 +47,7 @@ jobs:
           docker push ${IMAGE_BASE}:latest
 
       - name: Bygg og push docker-image til GitHub Package registry
-          run: |
+        run: |
             echo "Pusher til GitHub"
             docker login -u olovholm -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
             docker tag ${IMAGE_BASE}:latest docker.pkg.github.com/olovholm/eksperimentarium/eksperimentarium:latest

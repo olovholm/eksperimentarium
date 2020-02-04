@@ -45,7 +45,7 @@ jobs:
           docker push ${IMAGE}
           docker push ${IMAGE_BASE}:latest
           echo "Pusher til GitHub"
-          docker login -u olovholm -p ${{ secrets.GITHUB_ACCESS_TOKEN }} docker.pkg.github.com
+          docker login -u olovholm -p ${{ GITHUB_TOKEN }} docker.pkg.github.com
           docker tag ${IMAGE_BASE}:latest docker.pkg.github.com/olovholm/eksperimentarium/eksperimentarium:latest
 
 

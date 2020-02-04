@@ -1,0 +1,18 @@
+name: Kall videre ved push av image
+
+on:
+  registry_package:
+    types: [published, updated]
+
+jobs:
+  verdikjedetriggere:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger verdikjedetester K9
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          repository: olovholm/bootyspring
+          event-type: saksbehandling-verdikjede
+          client-payload: '{ "trigger": "${{ github.repository }}", "version": "${{ env.TAG }}", "image": ${{ env.IMAGE }}}'
+

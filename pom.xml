@@ -12,6 +12,7 @@
     <modules>
         <module>integrasjon</module>
         <module>domene</module>
+        <module>frontend</module>
         <module>server</module>
     </modules>
 
